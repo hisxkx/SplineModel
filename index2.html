@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Visor 3D - Spline</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header, footer {
+      background-color: #222;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .viewer-container {
+      flex: 1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    spline-viewer {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+
+    .loader, .instructions {
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #111;
+      z-index: 10;
+      padding: 1rem;
+      overflow-y: auto;
+      text-align: center;
+    }
+
+    .loader img {
+      width: 200px;
+      margin-bottom: 1rem;
+    }
+
+    .loader h2 {
+      font-size: 2rem;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .instructions h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions p {
+      max-width: 600px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .controls {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .image-explainer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .image-explainer img {
+      width: 100px;
+      border-radius: 8px;
+    }
+
+    .image-explainer p {
+      margin: 0;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    .instructions button {
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .instructions button:hover {
+      background-color: #00ccaa;
+    }
+
+    /* Tablets */
+    @media (max-width: 768px) {
+      .loader img { width: 150px; }
+      .loader h2, .instructions h2 { font-size: 1.5rem; }
+      .instructions p, .controls, .image-explainer p { font-size: 1rem; }
+      .image-explainer img { width: 80px; }
+      .image-explainer { flex-direction: column; text-align: center; }
+    }
+
+    /* Celulares */
+    @media (max-width: 480px) {
+      .loader img { width: 120px; }
+      .loader h2, .instructions h2 { font-size: 1.2rem; }
+      .instructions p, .controls, .image-explainer p { font-size: 0.95rem; }
+      .image-explainer img { width: 100%; max-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Know About Bassassin and D&B!!</h1>
+  </header>
+
+  <div class="viewer-container">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.98/build/spline-viewer.js"></script>
+    
+    <spline-viewer 
+      id="myViewer"
+      loading-anim-type="none" 
+      url="https://prod.spline.design/MoC3BtA0Jv8GWomK/scene.splinecode">
+    </spline-viewer>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+      <img src="Logo Bassassin B.png" alt="Logo de carga">
+      <h2>Loading model...<br>Music and full energy!</h2>
+    </div>
+
+    <!-- Pantalla de instrucciones -->
+    <div class="instructions" id="instructions">
+      <h2>Welcome to the DJ 3D Experience!</h2>
+      <p>Interact with the 3D environment like a true DJ!</p>
+
+      <div class="controls">
+        <p>🖱️ Right click → Move</p>
+        <p>🖱️ Left click → Rotate</p>
+        <p>🖱️ Middle wheel → Zoom in/out</p>
+      </div>
+
+      <!-- Explicación visual de los botones -->
+      <div class="image-explainer">
+        <img src="MusicExplain.png" alt="Play music">
+        <p>Move the button to the right to start the music.</p>
+      </div>
+
+      <div class="image-explainer">
+        <img src="MusicExplain02.png" alt="Stop music">
+        <p>Click the red cube to stop the music.</p>
+      </div>
+
+      <div class="image-explainer">
+        <img src="BiografyButton.png" alt="Next page">
+        <p>Hold down the button to reveal the next page.</p>
+      </div>
+
+      <button onclick="startExperience()">Explore model</button>
+    </div>
+  </div>
+
+  <footer>
+    Proyecto final Interfaces
+  </footer>
+
+  <script>
+    const viewer = document.getElementById("myViewer");
+    const loader = document.getElementById("loader");
+    const instructions = document.getElementById("instructions");
+
+    function startExperience() {
+      instructions.style.display = "none";
+      viewer.style.display = "block";
+    }
+
+    viewer.addEventListener("load", () => {
+      loader.style.display = "none";
+    });
+
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 10000);
+  </script>
+
+</body>
+</html>
